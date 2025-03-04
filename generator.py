@@ -1,8 +1,7 @@
 from transformers import pipeline
 from retriever import retrieve_best_chunk
 
-# Use a smaller model for better response generation
-llm_pipeline = pipeline("text-generation", model="tiiuae/falcon-7b-instruct")
+llm_pipeline = pipeline("text-generation", model="mosaicml/mpt-7b-instruct")
 
 def generate_response(query):
     try:
