@@ -2,7 +2,7 @@ from transformers import pipeline
 from retriever import retrieve_best_chunk
 
 # Use a smaller model that loads faster and consumes less RAM
-llm_pipeline = pipeline("text-generation", model="mosaicml/mpt-7b-instruct", device="cpu")
+llm_pipeline = pipeline("text-generation", model="mosaicml/mpt-30b")
 
 def generate_response(query):
     try:
