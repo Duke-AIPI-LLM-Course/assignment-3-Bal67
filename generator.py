@@ -13,22 +13,19 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=250,  
+            max_length=150, 
             do_sample=True,
-            temperature=0.8,
-            top_p=0.9,
-            pad_token_id=50256,
-            eos_token_id=50256
+            temperature=0.8,  
+            top_p=0.9,  
+            pad_token_id=50256, 
+            eos_token_id=50256  
         )
 
         if not response or "generated_text" not in response[0]:
             return "Sorry, the model failed to generate a response."
 
-        # Extract only the relevant portion starting from "Diabetes is"
-        full_text = response[0]['generated_text']
-        filtered_text = full_text[full_text.lower().find("diabetes is"):]
-
-        return filtered_text.strip()
+        return response[0]['generated_text']
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
+
