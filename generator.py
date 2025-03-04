@@ -2,7 +2,7 @@ from transformers import pipeline
 from retriever import retrieve_best_chunk
 
 # Load open-source LLM
-llm_pipeline = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct")
+llm_pipeline = pipeline("text-generation", model="google/flan-t5-base")
 
 def generate_response(query):
     context = retrieve_best_chunk(query)
