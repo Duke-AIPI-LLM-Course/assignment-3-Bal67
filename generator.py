@@ -1,7 +1,7 @@
 from transformers import pipeline
 from retriever import retrieve_best_chunk
 
-llm_pipeline = pipeline("text-generation", model="gpt2", device="cpu")
+llm_pipeline = pipeline("text-generation", model="gpt2", device="cpu", pad_token_id=50256)
 
 def generate_response(query):
     try:
@@ -11,7 +11,7 @@ def generate_response(query):
 
         prompt = f"Context: {context}\n\nUser Query: {query}\n\nAnswer:"
 
-        response = llm_pipeline(prompt, max_length=100, do_sample=True)
+        response = llm_pipeline(prompt, max_length=250, do_sample=True, pad_token_id=50256)
 
         if not response or "generated_text" not in response[0]:
             return "Sorry, the model failed to generate a response."

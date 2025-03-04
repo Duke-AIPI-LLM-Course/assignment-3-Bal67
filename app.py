@@ -12,9 +12,9 @@ if query:
 
         if response.strip():
             st.write("Response:")
-            st.write(response)
+            st.markdown(f"```{response}```")
         else:
             st.write("No response was generated. Try a different question.")
     
     except Exception as e:
-        st.write(f"⚠️ Error: {str(e)}")
+        st.write(f"Error: {str(e)}")
