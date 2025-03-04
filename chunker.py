@@ -1,7 +1,7 @@
 import nltk
 import json
 
-nltk.download("punkt")
+nltk.download("punkt_tab")
 
 # Load scraped text
 with open("data.txt", "r", encoding="utf-8") as f:
