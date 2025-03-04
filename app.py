@@ -7,11 +7,14 @@ st.write("Ask any question related to diabetes!")
 query = st.text_input("Enter your question:")
 
 if query:
-    response = generate_response(query)
+    try:
+        response = generate_response(query)
 
-    # Prevent empty output
-    if response.strip():
-        st.write("Response:")
-        st.write(response)
-    else:
-        st.write("No response was generated. Try a different question.")
+        if response.strip():
+            st.write("Response:")
+            st.write(response)
+        else:
+            st.write("No response was generated. Try a different question.")
+    
+    except Exception as e:
+        st.write(f"⚠️ Error: {str(e)}")
