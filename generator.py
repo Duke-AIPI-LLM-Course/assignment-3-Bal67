@@ -13,9 +13,9 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=150, 
+            max_length=200, 
             do_sample=True,
-            temperature=0.8,  
+            temperature=0.7,  
             top_p=0.9,  
             pad_token_id=50256, 
             eos_token_id=50256  
