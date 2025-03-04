@@ -1,7 +1,14 @@
 from transformers import pipeline
 from retriever import retrieve_best_chunk
 
-llm_pipeline = pipeline("text-generation", model="mosaicml/mpt-7b-instruct")
+llm_pipeline = pipeline(
+    "text-generation",
+    model="tiiuae/falcon-7b-instruct",
+    device="mps",
+    torch_dtype="float16",  # Use half precision
+    max_length=256,  # Limit response size
+    batch_size=1  # Reduce memory usage
+)
 
 def generate_response(query):
     try:
