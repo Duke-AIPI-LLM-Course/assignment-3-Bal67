@@ -12,7 +12,7 @@ if query:
 
         if response.strip():
             st.write("Response:")
-            st.markdown(f"```{response}```")
+            st.write(response)
         else:
             st.write("No response was generated. Try a different question.")
     
