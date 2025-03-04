@@ -8,5 +8,10 @@ query = st.text_input("Enter your question:")
 
 if query:
     response = generate_response(query)
-    st.write("Response:")
-    st.write(response)
+
+    # Prevent empty output
+    if response.strip():
+        st.write("Response:")
+        st.write(response)
+    else:
+        st.write("No response was generated. Try a different question.")
