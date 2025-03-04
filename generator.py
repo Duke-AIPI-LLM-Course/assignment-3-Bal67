@@ -9,15 +9,15 @@ def generate_response(query):
         if not context:
             return "Sorry, I couldn't find relevant information."
 
-        prompt = f"User Query: {query}\n\nAnswer:"
+        prompt = f"Context: {context}\n\nUser Query: {query}\n\nAnswer:"
 
         response = llm_pipeline(
             prompt,
             max_length=200, 
             do_sample=True,
-            temperature=0.7,  
+            temperature=0.9,  
             top_p=0.9,  
-            pad_token_id=50256, 
+            pad_token_id=50256,  
             eos_token_id=50256  
         )
 
