@@ -20,4 +20,4 @@ text_data = " ".join([p.text for p in soup.find_all("p")])
 with open("data.txt", "w", encoding="utf-8") as f:
     f.write(text_data)
 
-print("✅ Web scraping completed. Data saved to data.txt")
+print("Web scraping completed. Data saved to data.txt")

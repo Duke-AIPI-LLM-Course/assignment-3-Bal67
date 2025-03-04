@@ -35,4 +35,4 @@ chunks = chunk_text(sentences)
 with open("chunks.json", "w") as f:
     json.dump(chunks, f)
 
-print(f"✅ Chunking completed: {len(chunks)} chunks created.")
+print(f"Chunking completed: {len(chunks)} chunks created.")

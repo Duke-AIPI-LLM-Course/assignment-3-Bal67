@@ -18,4 +18,4 @@ db = {"chunks": chunks, "vectors": chunk_embeddings}
 with open("database.json", "w") as f:
     json.dump(db, f)
 
-print("✅ Embeddings computed and saved in database.json.")
+print("Embeddings computed and saved in database.json.")

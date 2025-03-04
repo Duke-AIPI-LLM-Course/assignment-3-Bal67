@@ -22,7 +22,3 @@ def retrieve_best_chunk(query):
     similarities = [cosine_similarity(query_embedding, vec) for vec in chunk_vectors]
     best_idx = np.argmax(similarities)
     return chunks[best_idx]
-
-# Test retrieval
-query = "What are the symptoms of diabetes?"
-print(f"✅ Retrieved Context: {retrieve_best_chunk(query)}")

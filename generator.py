@@ -11,5 +11,3 @@ def generate_response(query):
     response = llm_pipeline(prompt, max_length=100, do_sample=True)
     return response[0]['generated_text']
 
-# Test LLM response
-print(generate_response("How do I manage diabetes?"))
