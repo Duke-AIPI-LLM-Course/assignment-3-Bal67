@@ -1,17 +1,21 @@
 import numpy as np
-from sentence_transformers import SentenceTransformer
 import json
+from sentence_transformers import SentenceTransformer
 
+# Load embedding model
 embed_model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 
+# Load text chunks
 with open("chunks.json", "r") as f:
     chunks = json.load(f)
 
-chunk_embeddings = [embed_model.encode(chunk) for chunk in chunks]
+# Compute embeddings
+chunk_embeddings = [embed_model.encode(chunk).tolist() for chunk in chunks]
 
-db = {"chunks": chunks, "vectors": [vec.tolist() for vec in chunk_embeddings]}
+# Save to database
+db = {"chunks": chunks, "vectors": chunk_embeddings}
 
 with open("database.json", "w") as f:
     json.dump(db, f)
 
-print("Embeddings computed and stored.")
+print("✅ Embeddings computed and saved in database.json.")

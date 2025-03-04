@@ -1,11 +1,10 @@
 import streamlit as st
 from generator import generate_response
 
-st.title("RAG-based LLM Application")
-st.write("Ask me a question related to diabetes!")
+st.title("🔎 RAG-Powered LLM on Diabetes")
+st.write("Ask any question related to diabetes!")
 
-# User input
-query = st.text_input("Enter your query:")
+query = st.text_input("Enter your question:")
 
 if query:
     response = generate_response(query)
