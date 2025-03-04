@@ -1,17 +1,11 @@
 from transformers import pipeline
 from retriever import retrieve_best_chunk
 
-llm_pipeline = pipeline(
-    "text-generation",
-    model="mosaicml/mpt-7b-instruct",
-    torch_dtype="float16",  # Reduce memory usage
-    device="cpu"
-)
+llm_pipeline = pipeline("text-generation", model="google/flan-t5-small", device="cpu")
 
 def generate_response(query):
     try:
         context = retrieve_best_chunk(query)
-
         if not context:
             return "Sorry, I couldn't find relevant information."
 
@@ -26,3 +20,4 @@ def generate_response(query):
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
+
