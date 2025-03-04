@@ -1,8 +1,13 @@
-import gradio as gr
+import streamlit as st
 from generator import generate_response
 
-def rag_api(query):
-    return generate_response(query)
+st.title("RAG-based LLM Application")
+st.write("Ask me a question related to diabetes!")
 
-iface = gr.Interface(fn=rag_api, inputs="text", outputs="text")
-iface.launch()
+# User input
+query = st.text_input("Enter your query:")
+
+if query:
+    response = generate_response(query)
+    st.write("Response:")
+    st.write(response)
