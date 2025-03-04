@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # URL of Britannica page
-URL = "https://www.britannica.com/science/diabetes"
+URL = "https://www.britannica.com/science/diabetes-mellitus"
 
 # Fetch the webpage
 response = requests.get(URL, headers={"User-Agent": "Mozilla/5.0"})
