@@ -1,7 +1,7 @@
 from transformers import pipeline
 from retriever import retrieve_best_chunk
 
-llm_pipeline = pipeline("text-generation", model="google/flan-t5-small", device="cpu")
+llm_pipeline = pipeline("text-generation", model="gpt2", device="cpu")
 
 def generate_response(query):
     try:
