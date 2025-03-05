@@ -20,7 +20,7 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=250,  # Reduce length to fit Streamlit limits
+            max_length=500,  # Reduce length to fit Streamlit limits
             do_sample=True,   # Enable sampling for better responses
             temperature=0.7,  # Control creativity
             top_p=0.9         # Improve answer diversity
