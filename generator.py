@@ -27,10 +27,11 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_new_tokens=150,
+            max_new_tokens=100,
             do_sample=True,
-            temperature=0.5,
-            top_p=0.95,
+            temperature=0.7,   
+            top_p=0.85,        
+            repetition_penalty=1.5,  
             pad_token_id=50256,
             eos_token_id=50256
         )
@@ -39,6 +40,7 @@ def generate_response(query):
             return "Sorry, the model failed to generate a response."
 
         generated_text = response[0]['generated_text'].strip()
+
         if "Answer:" in generated_text:
             generated_text = generated_text.split("Answer:")[-1].strip()
 
