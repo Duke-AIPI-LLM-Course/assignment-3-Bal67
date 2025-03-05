@@ -34,7 +34,13 @@ def generate_response(query):
             return "Sorry, the model failed to generate a response."
 
         generated_text = response[0]["generated_text"].strip()
-        return " ".join(generated_text.split(".")[:2]) + "."
+        sentences = generated_text.split(". ")  # Split response into sentences
+
+        # Remove the first sentence if it's unrelated, and return the rest
+        if len(sentences) > 1:
+            return ". ".join(sentences[1:])  # Return everything except the first sentence
+        else:
+            return generated_text  # If there's only one sentence, return it as is
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
