@@ -13,10 +13,10 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=300, 
+            max_length=400, 
             do_sample=False,
-            temperature=0.4,  
-            top_p=0.7,  
+            temperature=0.3,  
+            top_p=0.9,  
             pad_token_id=50256,  
             eos_token_id=50256  
         )
