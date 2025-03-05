@@ -26,7 +26,7 @@ def generate_response(query):
             prompt,
             max_new_tokens=120,
             do_sample=False,
-            temperature=0.2,   
+            temperature=0.7,   
             top_p=0.9,        
             repetition_penalty=2.5,  
             pad_token_id=50256,
