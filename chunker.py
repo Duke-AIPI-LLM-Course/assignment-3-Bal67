@@ -3,14 +3,13 @@ import json
 
 nltk.download("punkt_tab")
 
-# Load scraped text
+
 with open("data.txt", "r", encoding="utf-8") as f:
     text = f.read()
 
-# Split into sentences
 sentences = nltk.sent_tokenize(text)
 
-# Chunking function (50 words per chunk)
+
 def chunk_text(sentences, max_tokens=50):
     chunks, current_chunk = [], []
     token_count = 0
@@ -28,10 +27,10 @@ def chunk_text(sentences, max_tokens=50):
 
     return chunks
 
-# Generate chunks
+
 chunks = chunk_text(sentences)
 
-# Save chunks
+
 with open("chunks.json", "w") as f:
     json.dump(chunks, f)
 

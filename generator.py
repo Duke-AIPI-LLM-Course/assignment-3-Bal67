@@ -34,7 +34,7 @@ def generate_response(query):
             return "Sorry, the model failed to generate a response."
 
         generated_text = response[0]["generated_text"].strip()
-        sentences = generated_text.split(". ")  # Split into individual sentences
+        sentences = generated_text.split(". ")  
 
         return sentences[1] + "." if sentences else "No relevant answer found."
 
