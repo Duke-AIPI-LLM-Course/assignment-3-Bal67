@@ -1,11 +1,11 @@
 from transformers import pipeline
-from retriever import retrieve_best_chunk
+from retriever import retrieve_best_chunks
 
 llm_pipeline = pipeline("text-generation", model="gpt2", device="cpu")
 
 def generate_response(query):
     try:
-        context = retrieve_best_chunk(query)
+        context = retrieve_best_chunks(query)
         if not context:
             return "Sorry, I couldn't find relevant information."
 
