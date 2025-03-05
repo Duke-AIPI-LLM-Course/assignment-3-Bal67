@@ -6,7 +6,7 @@ import sys
 
 llm_pipeline = pipeline(
     "text-generation",
-    model="EleutherAI/gpt-neo-2.7B",
+    model="distilgpt2",
     device="cpu"
 )
 
