@@ -21,10 +21,10 @@ def generate_response(query):
         response = llm_pipeline(
             prompt,
             max_length=500,  
-            do_sample=False,
-            temperature=0.7,  
+            do_sample=True,
+            temperature=0.5,  
             top_p=0.7,
-            repetition_penalty=1.2,
+            repetition_penalty=1.5,
             num_return_sequences=1,
             pad_token_id=50256,
             eos_token_id=50256         
