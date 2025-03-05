@@ -13,9 +13,9 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=250, 
+            max_length=300, 
             do_sample=False,
-            temperature=0.8,  
+            temperature=0.3,  
             top_p=0.9,  
             pad_token_id=50256,  
             eos_token_id=50256  
@@ -24,7 +24,12 @@ def generate_response(query):
         if not response or "generated_text" not in response[0]:
             return "Sorry, the model failed to generate a response."
 
-        return response[0]['generated_text'].strip().split(".")[0]+"."
+        full_response = response[0]['generated_text'].strip()
+
+        # If response contains bullet points, format them correctly
+        if "-" in full_response or "•" in full_response:
+            return "\n".join(["- " + line.strip() for line in full_response.split("\n") if line.strip()])
+
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
