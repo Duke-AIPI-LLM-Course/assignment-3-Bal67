@@ -18,13 +18,9 @@ def generate_response(query):
 
         prompt = f"Context: {context}\n\nQuestion: {query}\nAnswer:"
 
-        input_tokens = llm_pipeline.tokenizer(prompt, return_tensors="pt")["input_ids"]
-        if input_tokens.shape[1] > 200:
-            prompt = llm_pipeline.tokenizer.decode(input_tokens[0, -200:], skip_special_tokens=True)
-
         response = llm_pipeline(
             prompt,
-            max_new_tokens=120,
+            max_new_tokens=100,
             do_sample=False,
             temperature=0.7,   
             top_p=0.9,        
