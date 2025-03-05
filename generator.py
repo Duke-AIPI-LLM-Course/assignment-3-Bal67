@@ -33,12 +33,8 @@ def generate_response(query):
         if not response or "generated_text" not in response[0]:
             return "Sorry, the model failed to generate a response."
 
-        generated_text = response[0]['generated_text'].strip()
-
-        if "Answer:" in generated_text:
-            generated_text = generated_text.split("Answer:")[-1].strip()
-
-        return generated_text
+        generated_text = response[0]["generated_text"].strip()
+        return " ".join(generated_text.split(".")[:2]) + "."
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
