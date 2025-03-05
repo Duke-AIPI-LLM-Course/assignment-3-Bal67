@@ -6,7 +6,7 @@ import sys
 
 llm_pipeline = pipeline(
     "text-generation",
-    model="microsoft/phi-2",
+    model="EleutherAI/gpt-neo-2.7B",
     device="cpu"
 )
 
