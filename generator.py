@@ -24,12 +24,7 @@ def generate_response(query):
         if not response or "generated_text" not in response[0]:
             return "Sorry, the model failed to generate a response."
 
-        full_response = response[0]['generated_text'].strip()
-
-        # If response contains bullet points, format them correctly
-        if "-" in full_response or "•" in full_response:
-            return "\n".join(["- " + line.strip() for line in full_response.split("\n") if line.strip()])
-
+        return response[0]['generated_text'].strip().split(".")[0]+"."
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
