@@ -20,7 +20,7 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=150,  
+            max_new_tokens=100,  
             do_sample=True,
             temperature=0.8,  
             top_p=0.9,
