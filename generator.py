@@ -23,7 +23,8 @@ def generate_response(query):
             max_length=500,  
             do_sample=True,
             temperature=0.8,  
-            top_p=0.9         
+            top_p=0.9,
+            pad_token_id=50256         
         )
 
         if not response or "generated_text" not in response[0]:
