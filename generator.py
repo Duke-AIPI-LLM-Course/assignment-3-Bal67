@@ -36,7 +36,7 @@ def generate_response(query):
         generated_text = response[0]["generated_text"].strip()
         sentences = generated_text.split(". ")  # Split into individual sentences
 
-        return sentences[0] + "." if sentences else "No relevant answer found."
+        return sentences[1] + "." if sentences else "No relevant answer found."
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
