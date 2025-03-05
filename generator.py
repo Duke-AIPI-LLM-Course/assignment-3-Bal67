@@ -1,32 +1,41 @@
+import asyncio
+import transformers
+import torch
 from transformers import pipeline
 from retriever import retrieve_best_chunks
-import torch
+import sys
 
-# Force CPU usage to prevent memory errors
-device = "cpu"
-torch.set_default_device("cpu")
+# Fix asyncio event loop error in Streamlit
+if sys.platform == "win32":  # Windows Fix
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-# Load a reliable model
-llm_pipeline = pipeline("text-generation", model="EleutherAI/gpt-neo-1.3B", device=device)
+# Load model with fallback to CPU
+llm_pipeline = transformers.pipeline(
+    task="text-generation",
+    model="EleutherAI/gpt-neo-1.3B",
+    device=0 if torch.cuda.is_available() else -1  # Uses GPU if available, otherwise CPU
+)
 
 def generate_response(query):
     try:
-        # Retrieve relevant context from the database
+        # Retrieve context
         context = retrieve_best_chunks(query)
 
         if not context:
             return "Sorry, I couldn't find relevant information."
 
+        # Create LLM input
         prompt = f"{context}\n\nAnswer:"
 
-
+        # Ensure input isn't too long
         input_tokens = llm_pipeline.tokenizer(prompt, return_tensors="pt")["input_ids"]
-        if input_tokens.shape[1] > 200:  
+        if input_tokens.shape[1] > 200:  # Trim input to leave space for output
             prompt = llm_pipeline.tokenizer.decode(input_tokens[0, -200:], skip_special_tokens=True)
 
+        # Debug: Print final model input
+        print(f"🔍 Final Prompt Sent to Model:\n{prompt}")
 
-        print(f"Final Prompt Sent to Model:\n{prompt}")
-
+        # Generate response with `max_new_tokens`
         response = llm_pipeline(
             prompt,
             max_new_tokens=100,  # Allow model to generate up to 100 tokens
@@ -44,3 +53,6 @@ def generate_response(query):
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
+
+if __name__ == "__main__":
+    print(generate_response("What is diabetes?"))
