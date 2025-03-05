@@ -15,8 +15,8 @@ def generate_response(query):
             prompt,
             max_length=400, 
             do_sample=False,
-            temperature=0.7,  
-            top_p=1.0,  
+            temperature=0.1,  
+            top_p=0.5,  
             pad_token_id=50256,  
             eos_token_id=50256  
         )
