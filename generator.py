@@ -22,7 +22,7 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_length=300,
+            max_length=150,
             do_sample=False,
             temperature=0.3,
             top_p=0.9,
@@ -38,5 +38,3 @@ def generate_response(query):
     except Exception as e:
         return f"Error generating response: {str(e)}"
 
-if __name__ == "__main__":
-    print(generate_response("What are symptoms of diabetes?"))
