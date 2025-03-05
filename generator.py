@@ -6,7 +6,7 @@ import sys
 
 llm_pipeline = pipeline(
     "text-generation",
-    model="distillgpt2",
+    model="gpt2",
     device="cpu"
 )
 
