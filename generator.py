@@ -22,7 +22,6 @@ def generate_response(query):
             prompt,
             max_length=500,  
             do_sample=True,
-            repetition_penalty=1.2,   
             temperature=0.8,  
             top_p=0.9         
         )
