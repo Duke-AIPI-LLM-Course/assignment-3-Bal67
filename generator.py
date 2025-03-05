@@ -2,29 +2,36 @@ from transformers import pipeline
 from retriever import retrieve_best_chunks
 import torch
 
-device = "cpu"  # Force CPU usage
-torch.set_default_device("cpu")  # Explicitly set CPU as default
+# Force CPU usage to prevent memory errors
+device = "cpu"
+torch.set_default_device("cpu")
 
-# Load a SMALL, RELIABLE model (GPT-2 or GPT-Neo)
+# Load a reliable model
 llm_pipeline = pipeline("text-generation", model="EleutherAI/gpt-neo-1.3B", device=device)
 
 def generate_response(query):
     try:
+        # Retrieve relevant context from the database
         context = retrieve_best_chunks(query)
 
         if not context:
             return "Sorry, I couldn't find relevant information."
 
-        print(f"🔍 Final Prompt Sent to Model:\n{context}")
+        prompt = f"{context}\n\nAnswer:"
 
-        # Force the model to return structured bullet points
-        prompt = f"List the symptoms of diabetes clearly:\n\n{context}\n\nSymptoms:"
+
+        input_tokens = llm_pipeline.tokenizer(prompt, return_tensors="pt")["input_ids"]
+        if input_tokens.shape[1] > 200:  
+            prompt = llm_pipeline.tokenizer.decode(input_tokens[0, -200:], skip_special_tokens=True)
+
+
+        print(f"Final Prompt Sent to Model:\n{prompt}")
 
         response = llm_pipeline(
             prompt,
-            max_length=150,
-            do_sample=False,
-            temperature=0.3,
+            max_new_tokens=100,  # Allow model to generate up to 100 tokens
+            do_sample=False,      # Ensure consistent responses
+            temperature=0.3,      # Reduce randomness
             top_p=0.9,
             pad_token_id=50256,
             eos_token_id=50256
@@ -37,4 +44,3 @@ def generate_response(query):
 
     except Exception as e:
         return f"Error generating response: {str(e)}"
-
