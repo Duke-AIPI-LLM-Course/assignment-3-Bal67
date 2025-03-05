@@ -4,9 +4,6 @@ from transformers import pipeline
 from retriever import retrieve_best_chunks
 import sys
 
-if sys.platform == "win32":
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
 llm_pipeline = pipeline(
     "text-generation",
     model="gpt2",
@@ -27,11 +24,11 @@ def generate_response(query):
 
         response = llm_pipeline(
             prompt,
-            max_new_tokens=100,
+            max_new_tokens=120,
             do_sample=True,
             temperature=0.7,   
-            top_p=0.85,        
-            repetition_penalty=1.5,  
+            top_p=0.9,        
+            repetition_penalty=1.7,  
             pad_token_id=50256,
             eos_token_id=50256
         )
